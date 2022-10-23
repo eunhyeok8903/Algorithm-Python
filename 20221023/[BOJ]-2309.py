@@ -1,30 +1,19 @@
-li=[] #난쟁이 키 리스트
-sum=0 #난쟁이 키 sum값
-flag = False #키 100 값 확인 Flag
-m,n= 0,0 # 9명중 7명을 뽑아야하는데 제외시킬 2명
+li=[] #입력받을 난쟁이 리스트
 
-#값 입력받기
+#입력
 for i in range(9):
-    n = int(input())
-    li.append(n)
-    sum+=n
+    li.append(int(input()))
 
-# 제외 시킬 난쟁이 i,j값을 브루트 포스로 찾아줌
+li.sort() #정렬 하고 시작
+sum = sum(li) # 난쟁이 키 총합
+
 for i in range(0,9):
-    for j in range(i+1,9): #i+1주의
-        if flag ==False:
-            temp = sum - li[i] -li[j] #총합에서 2명을 뺐을때 값이 100이면 됨
-            if temp==100:
-                m,n = i,j
-                flag=True #찾으면 Flag값 True
-                break
-
-result=[] #결과값 출력 리스트 선언
-for k in range(9):
-    if k!=m and k!=n:
-        result.append(li[k])
-result.sort() #정렬
-
-#출력
-for k in range(7):
-    print(result[k])
+    for j in range(i+1,9):
+        if (sum-li[i]-li[j]) == 100:
+            #2명을 뺀 7명의 난쟁이 키의 합이 100일때 2명 빼고 모두 출력
+            for k in range(0,9):
+                if k==i or k==j :
+                    continue
+                else:
+                    print(li[k])
+            exit()
